@@ -7,5 +7,7 @@ public class effect {
     public text_manager(waterlife plugin) {
         this.plugin = plugin;
     }
-    public give_effect()
+    public give_effect(){
+        
+    }
 }
