@@ -1,2 +1,2 @@
-rootProject.name = "sample"
-include("sample")
+rootProject.name = "waterlife"
+include("waterlife")
