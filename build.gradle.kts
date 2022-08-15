@@ -3,22 +3,29 @@ var plugin_name:String = "waterlife"
 var name:String = "rrayy"
 
 plugins {
-    id ("java")
+    java
 }
 
 repositories {
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven { 
+        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot
+        //url = uri("https://repo.papermc.io/repository/maven-public/")// Paper
+    } 
 }
 
 dependencies {
     //JUnit Jupiter 사용.
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
-    //spigot api 불러오기.
-    compileOnly ("org.spigotmc:spigot-api:"+mcversion+"-R0.1-SNAPSHOT")
-    //InvFX 불러오기
-    //implementation("io.github.monun:invfx-api:2.1.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    compileOnly ("org.spigotmc:spigot-api:"+mcversion+"-R0.1-SNAPSHOT") //spigot-API
+    //compileOnly("io.papermc.paper:paper-api:"+mcversion+"-R0.1-SNAPSHOT") // Paper-API
+    //implementation("io.github.monun:invfx-api:2.1.0") //InvFX-API
+
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 tasks.withType<JavaCompile> {
