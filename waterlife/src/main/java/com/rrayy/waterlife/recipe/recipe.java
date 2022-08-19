@@ -44,7 +44,8 @@ public class recipe {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN+"생명의 물");
         item.setItemMeta(meta);
-        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,10,5);
+        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,50,5);
+        //물 양동이를 5초간 구우면 50 경험치와 생명의 물
         return recipe2;
     }
 
@@ -53,7 +54,8 @@ public class recipe {
         ItemStack item = new ItemStack(Material.IRON_HELMET);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.RED+"튼튼한 투구");
-        item.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        item.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3); //보호 3
+        item.addEnchantment(Enchantment.DURABILITY, 2); //내구 2
         item.setItemMeta(meta);
         ShapedRecipe recipe3 = new ShapedRecipe(key, item).shape("III", "IRI", "R R");
         recipe3.setIngredient('I', Material.IRON_INGOT);
