@@ -12,8 +12,9 @@ import com.rrayy.waterlife.recipe.recipe;
 import com.rrayy.waterlife.effect.effect;
 
 public class waterlife extends JavaPlugin implements Listener {
-    recipe r = new recipe(null);
-    effect e = new effect(null);
+    private waterlife waterlife;
+    recipe r = new recipe(waterlife);
+    effect e = new effect(waterlife);
     @Override
     public void onEnable(){
         //플러그인 활성화
