@@ -14,7 +14,6 @@ import com.rrayy.waterlife.waterlife;
 
 
 public class recipe {
-    public static Object recipe;
     private waterlife plugin;
 
     public waterlife getPlugin() {
@@ -44,8 +43,8 @@ public class recipe {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN+"생명의 물");
         item.setItemMeta(meta);
-        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,50,5);
-        //물 양동이를 5초간 구우면 50 경험치와 생명의 물
+        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,50,12);
+        //물 양동이를 12초간 구우면 50 경험치와 생명의 물
         return recipe2;
     }
 

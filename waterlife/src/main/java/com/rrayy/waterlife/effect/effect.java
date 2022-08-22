@@ -3,7 +3,7 @@ package com.rrayy.waterlife.effect;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -15,7 +15,6 @@ import com.rrayy.waterlife.waterlife;
 public class effect {
     Player[] el;
     private waterlife plugin;
-    public static Object effect;
 
     public effect(waterlife plugin) {
         this.plugin = plugin;
@@ -36,11 +35,10 @@ public class effect {
 
     @EventHandler
     public static final EntityPotionEffectEvent.Cause POTION_DRINK(EntityPotionEffectEvent e, ItemMeta i){
-        Entity entity = e.getEntity();
+        EntityType entity = e.getEntity().getType();
         PotionEffect effect = e.getNewEffect();
         String name = i.getDisplayName();
-        if (effect == null && name == ChatColor.GREEN+"생명의 물"){
-            entity.remove();
+        if (entity == EntityType.PLAYER && effect == null && name == ChatColor.GREEN+"생명의 물"){
             
         }
         return null;
