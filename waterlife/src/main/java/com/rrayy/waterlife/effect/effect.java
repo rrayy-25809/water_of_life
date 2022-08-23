@@ -10,19 +10,10 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
-import com.rrayy.waterlife.waterlife;
+//import com.rrayy.waterlife.waterlife;
 
 public class effect {
     Player[] el;
-    private waterlife plugin;
-
-    public effect(waterlife plugin) {
-        this.plugin = plugin;
-    }
-
-    public waterlife getPlugin() {
-        return plugin;
-    }
 
     public Player give_effect(Player p) throws InterruptedException{
         while (p != null) {

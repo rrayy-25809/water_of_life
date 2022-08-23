@@ -1,2 +1,2 @@
-rootProject.name = 'waterlife'
+rootProject.name = 'water_of_life'
 include('waterlife')
