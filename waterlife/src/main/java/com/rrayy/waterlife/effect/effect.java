@@ -1,36 +1,46 @@
 package com.rrayy.waterlife.effect;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
-import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 
 //import com.rrayy.waterlife.waterlife;
 
 public class effect {
-    Player[] el;
+    String[] el;
+    
 
-    public Player give_effect(Player p) throws InterruptedException{
-        while (p != null) {
-            int food = p.getFoodLevel();
-            p.setFoodLevel(food-1);
-            TimeUnit.SECONDS.sleep(15);
-        }
-        return p;
+    public void give_effect(Player p){
+        String n = p.getName();
+        boolean in_el = Arrays.asList(el).contains(n);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin) this, new Runnable() {
+            @Override
+            public void run(){
+                int food = p.getFoodLevel();
+                if (food <= 1 && !in_el) {
+                    p.setFoodLevel(food-1);
+                    p.sendMessage("배고프당!");
+                }else {
+                    p.sendMessage("배고프지 않당!");
+                }
+                    }
+        }, 0L, 15*20);
     }
 
     @EventHandler
-    public static final EntityPotionEffectEvent.Cause POTION_DRINK(EntityPotionEffectEvent e, ItemMeta i){
-        EntityType entity = e.getEntity().getType();
+    public EntityPotionEffectEvent.Cause POTION_DRINK(EntityPotionEffectEvent e){
+        Entity entity = e.getEntity();
         PotionEffect effect = e.getNewEffect();
-        String name = i.getDisplayName();
-        if (entity == EntityType.PLAYER && effect == null && name == ChatColor.GREEN+"생명의 물"){
-            
+        String name = entity.getName();
+        if (entity.getType() == EntityType.PLAYER && effect == null && !Arrays.asList(el).contains(name)){
+            Arrays.asList(el).add(name);
         }
         return null;
     }

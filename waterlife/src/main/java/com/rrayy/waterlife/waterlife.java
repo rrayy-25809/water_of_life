@@ -14,10 +14,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//import com.rrayy.waterlife.effect.effect;
+import com.rrayy.waterlife.effect.effect;
 
 public class waterlife extends JavaPlugin implements Listener { 
-    //recipe r = new recipe();
+    effect e = new effect();
     @Override
     public void onEnable(){
         //플러그인 활성화
@@ -33,10 +33,9 @@ public class waterlife extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-	public void onJoin(PlayerJoinEvent p) throws InterruptedException {
+    public void onJoin(PlayerJoinEvent p){
         Player py = p.getPlayer();
-        String pn = py.getName();
-        p.setJoinMessage("hi"+pn+"welcome to server");  
+        e.give_effect(py);
     }
 
     public void iron_pack(){
@@ -58,7 +57,7 @@ public class waterlife extends JavaPlugin implements Listener {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN+"생명의 물");
         item.setItemMeta(meta);
-        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,40,12);
+        FurnaceRecipe recipe2 = new FurnaceRecipe(key, item, Material.WATER_BUCKET,40,240);
         //물 양동이를 12초간 구우면 40 경험치와 생명의 물
         getServer().addRecipe(recipe2);
     }
@@ -68,8 +67,9 @@ public class waterlife extends JavaPlugin implements Listener {
         ItemStack item = new ItemStack(Material.IRON_HELMET);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.RED+"튼튼한 투구");
-        item.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3); //보호 3
-        item.addEnchantment(Enchantment.DURABILITY, 2); //내구 2
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, false); //보호 3
+        meta.addEnchant(Enchantment.DURABILITY, 2, false); //내구 2
+        //ignoreLevelRestriction 검색해서 정확한 파라미터 값 알아오기
         item.setItemMeta(meta);
         ShapedRecipe recipe3 = new ShapedRecipe(key, item).shape("III", "IRI", "R R");
         recipe3.setIngredient('I', Material.IRON_INGOT);
