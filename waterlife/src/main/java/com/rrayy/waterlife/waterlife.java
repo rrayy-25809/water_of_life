@@ -1,8 +1,5 @@
 package com.rrayy.waterlife;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,12 +8,12 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.rrayy.waterlife.effect.effect;
+import com.rrayy.waterlife.event.event;
 
-public class waterlife extends JavaPlugin implements Listener { 
+public class waterlife extends JavaPlugin{ 
     effect e = new effect();
     @Override
     public void onEnable(){
@@ -25,6 +22,7 @@ public class waterlife extends JavaPlugin implements Listener {
         iron_pack();
         water_of_life();
         sturdy_helmet();
+        getServer().getPluginManager().registerEvents(new event(), this);
     }
     @Override
     public void onDisable(){
@@ -32,18 +30,11 @@ public class waterlife extends JavaPlugin implements Listener {
         getLogger().info("생명수 plugin이 비활성화 되었습니다");
     }
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent p){
-        Player py = p.getPlayer();
-        e.give_effect(py);
-    }
-
     public void iron_pack(){
         NamespacedKey key = new NamespacedKey(this, "iron_pack");
-        ItemStack item = new ItemStack(Material.IRON_INGOT);
+        ItemStack item = new ItemStack(Material.IRON_INGOT,8);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.BLUE+"조잡한 철");
-        item.setAmount(8);
         item.setItemMeta(meta);
         ShapedRecipe recipe1 = new ShapedRecipe(key, item).shape("III", "ICI", "III");
         recipe1.setIngredient('I', Material.RAW_IRON);
@@ -67,9 +58,8 @@ public class waterlife extends JavaPlugin implements Listener {
         ItemStack item = new ItemStack(Material.IRON_HELMET);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.RED+"튼튼한 투구");
-        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, false); //보호 3
-        meta.addEnchant(Enchantment.DURABILITY, 2, false); //내구 2
-        //ignoreLevelRestriction 검색해서 정확한 파라미터 값 알아오기
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true); //보호 3
+        meta.addEnchant(Enchantment.DURABILITY, 2, true); //내구 2
         item.setItemMeta(meta);
         ShapedRecipe recipe3 = new ShapedRecipe(key, item).shape("III", "IRI", "R R");
         recipe3.setIngredient('I', Material.IRON_INGOT);
