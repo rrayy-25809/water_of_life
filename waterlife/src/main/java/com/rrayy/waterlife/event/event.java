@@ -5,7 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.rrayy.waterlife.effect.effect;
 
@@ -13,15 +12,10 @@ public class event implements Listener{
     effect e = new effect();
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent event){
-        event.setQuitMessage(event.getPlayer().getDisplayName()+"has left the sever");
-    }
-
-    @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         System.out.println("test");
         Player player = event.getPlayer();
-        player.sendMessage("message for test");
+        event.setJoinMessage(player.getDisplayName()+"님께서 갈증을 느낍니다");
         e.give_effect(player);
     }
 
